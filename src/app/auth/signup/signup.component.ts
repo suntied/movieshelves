@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-signup',
@@ -31,9 +32,9 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     const email = this.signUpForm.get('email').value;
     const password = this.signUpForm.get('password').value;
-
-    this.authService.createNewUser(email, password).then(
-      () => {
+    const newUser = new User(email, password);
+    this.authService.saveUser(newUser).subscribe(
+      res => {
         this.router.navigate(['/movies']);
       },
       (error) => {

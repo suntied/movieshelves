@@ -42,7 +42,7 @@ export class MovieFormComponent implements OnInit {
     const newMovie = new Movie(title, director, actor, gender);
     newMovie.synopsis = synopsis;
     if(this.fileUrl && this.fileUrl !== '') {
-      newMovie.affiche = this.fileUrl;
+      newMovie.poster = this.fileUrl;
     }
     this.moviesService.createNewMovie(newMovie);
     this.router.navigate(['/movie']);
